@@ -176,4 +176,37 @@ class Rental extends BaseController
         ];
         return view('pages/data_pengembalian', $data);
     }
+    public function saveDatapengembalian()
+    {
+        $faker = \Faker\Factory::create();
+        $this->dataPengembalianModel->save([
+          'id_pengembalian' => $faker->randomNumber(5),
+          'id_penyewa' => $this->request->getVar('id_penyewa'),
+          'no_ktp' => $this->request->getVar('no_ktp'),
+          'nama_penyewa' => $this->request->getVar('nama_penyewa'),
+          'id_plat_mobil' => $this->request->getVar('id_plat_mobil'),
+          'nama_mobil' => $this->request->getVar('nama_mobil'),
+          'tanggal_rental' => $this->request->getVar('tanggal_rental'),
+          'tanggal_kembali' => $this->request->getVar('tanggal_kembali'),
+          'terlambat' => $this->request->getVar('terlambat'),
+          'denda' => $this->request->getVar('denda')
+        ]);
+        return redirect()->to('/rental/cetakLaporan');
+    }
+    public function cetakLaporan()
+    {  
+        session();
+        $dataPengembalian = $this->dataPengembalianModel->findAll();
+        $data = [
+          'title' => 'Cetak Laporan',
+          'data_pengembalian' => $dataPengembalian,
+          'validation'=> \Config\Services::validation()
+        ];
+        session()->setFlashdata('pesan', 'Penyewaan Berhasil');
+        return view('pages/cetak_laporan', $data);
+    }
+    public function backLaporan()
+    {
+        return redirect()->to('/rental/penyewa');
+    }
 }
