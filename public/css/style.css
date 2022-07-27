@@ -1,0 +1,12 @@
+*.invalid {
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.invalid-feedback {
+  color: red;
+}
+
+.active {
+  background: green;
+}
