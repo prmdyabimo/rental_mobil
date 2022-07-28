@@ -178,6 +178,9 @@ class Rental extends BaseController
     }
     public function saveDatapengembalian()
     {
+        $denda = $this->request->getVar('denda');
+        $terlambat = $this->request->getVar('terlambat');
+        $hargaDenda = $denda * $terlambat;
         $faker = \Faker\Factory::create();
         $this->dataPengembalianModel->save([
           'id_pengembalian' => $faker->randomNumber(5),
@@ -189,7 +192,7 @@ class Rental extends BaseController
           'tanggal_rental' => $this->request->getVar('tanggal_rental'),
           'tanggal_kembali' => $this->request->getVar('tanggal_kembali'),
           'terlambat' => $this->request->getVar('terlambat'),
-          'denda' => $this->request->getVar('denda')
+          'denda' => $hargaDenda
         ]);
         return redirect()->to('/rental/cetakLaporan');
     }

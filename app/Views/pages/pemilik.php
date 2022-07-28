@@ -56,6 +56,13 @@
             </button>
         </div>
       </form>
+      <form action="/login/logout" method="post">
+        <div class="flex my-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto">
+            Logout
+            </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
